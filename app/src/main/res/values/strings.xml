@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AP</string>
+    <string name="play_btn_label">Play</string>
+    <string name="ranking_btn_label">Ranking</string>
+    <string name="settings_btn_label">Settings</string>
+    <string name="exit_btn_label">Exit</string>
 </resources>
