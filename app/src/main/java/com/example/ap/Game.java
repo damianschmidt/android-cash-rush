@@ -3,6 +3,7 @@ package com.example.ap;
 public class Game {
     private Player player;
     private Scene scene;
+    private Hud hud;
     private int countdown;
 
 
@@ -12,7 +13,10 @@ public class Game {
         this.countdown = countdown;
     }
 
-    private void initializedHud() {}
+    public void initializeHud() {
+        hud = new Hud(this);
+        this.scene.addObject(hud);
+    }
 
     public void start() {}
 }
