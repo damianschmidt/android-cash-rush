@@ -33,7 +33,7 @@ public class Scene extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.BLUE);
+        canvas.drawColor(Color.GRAY);
         for (BaseObject object : this.objects) {
             object.update(canvas);
         }

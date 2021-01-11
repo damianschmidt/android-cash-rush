@@ -16,4 +16,16 @@ public class Player {
     private void incrementScore() {
         score += 1;
     }
+
+    public int getColor() {
+        return color;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
 }

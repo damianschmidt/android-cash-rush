@@ -19,4 +19,12 @@ public class Game {
     }
 
     public void start() {}
+
+    public int getCountdown() {
+        return countdown;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
 }

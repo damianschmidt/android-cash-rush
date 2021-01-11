@@ -6,7 +6,7 @@ import android.graphics.Paint;
 
 public class Car extends CollideObject {
     public Car(int x, int y, int color) {
-        super(x, y, 30, 50, color);
+        super(x, y, 60, 100, color);
     }
 
     public void update(Canvas canvas) {
@@ -29,22 +29,29 @@ public class Car extends CollideObject {
     private void drawWheels(int x, int y, Canvas canvas) {
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
-        canvas.drawRect(x - 2, y + 10, x, y + 10 + 8, paint);
-        canvas.drawRect(x + this.getWidth(), y + 10, x + this.getWidth() + 2, y + 10 + 8, paint);
-        canvas.drawRect(x - 2, y + 35, x, y + 35 + 8, paint);
-        canvas.drawRect(x + this.getWidth(), y + 35, x + this.getWidth() + 2, y + 35 + 8, paint);
+        canvas.drawRect(x - 4, y + 20, x, y + 20 + 16, paint);
+        canvas.drawRect(x + this.getWidth(), y + 20, x + this.getWidth() + 4, y + 20 + 16, paint);
+        canvas.drawRect(x - 4, y + 70, x, y + 70 + 16, paint);
+        canvas.drawRect(x + this.getWidth(), y + 70, x + this.getWidth() + 4, y + 70 + 16, paint);
     }
 
     private void drawLights(int x, int y, Canvas canvas) {
-        
+        Paint paint = new Paint();
+        paint.setColor(Color.YELLOW);
+        canvas.drawRect(x + 4, y + 4, x + 4 + 16, y + 4 + 8, paint);
+        canvas.drawRect(x + 40, y + 4, x + 40 + 16, y + 4 + 8, paint);
+
+        paint.setColor(Color.RED);
+        canvas.drawRect(x + 6, y + 90, x + 6 + 12, y + 90 + 6, paint);
+        canvas.drawRect(x + 40, y + 90, x + 40 + 12, y + 90 + 6, paint);
     }
 
     private void drawWindows(int x, int y, Canvas canvas) {
         Paint paint = new Paint();
         paint.setColor(Color.argb(200, 255, 255, 255));
-        canvas.drawRect(x + 2, y + 15, x + 2 + this.getWidth() - 4, y + 15 + 8, paint);
-        canvas.drawRect(x + 2, y + 35, x + 2 + this.getWidth() - 4, y + 35 + 6, paint);
+        canvas.drawRect(x + 4, y + 30, x + 4 + this.getWidth() - 8, y + 30 + 16, paint);
+        canvas.drawRect(x + 4, y + 70, x + 4 + this.getWidth() - 8, y + 70 + 16, paint);
         paint.setColor(Color.argb(50, 0, 0, 0));
-        canvas.drawRect(x + 2, y + 23, x + 2 + this.getWidth() - 4, y + 23 + 12, paint);
+        canvas.drawRect(x + 4, y + 46, x + 4 + this.getWidth() - 8, y + 46 + 24, paint);
     }
 }
