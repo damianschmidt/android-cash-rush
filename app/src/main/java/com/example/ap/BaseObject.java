@@ -7,9 +7,33 @@ import android.graphics.Paint;
 import java.util.UUID;
 
 public class BaseObject {
-    private String id;
-    private int x, y, width, height, color;
-    private double rotation;
+    private final String id;
+    private final int x;
+    private final int y;
+    private final int width;
+    private final int height;
+    private final int color;
+    private final double rotation;
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getColor() {
+        return color;
+    }
 
     public BaseObject(int x, int y, int width, int height, int color, double rotation) {
         this.id = UUID.randomUUID().toString();

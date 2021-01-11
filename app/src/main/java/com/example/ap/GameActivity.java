@@ -20,10 +20,11 @@ public class GameActivity extends AppCompatActivity {
         scene = findViewById(R.id.scene);
         scene.post(() -> {
             scene.initializeMap();
+            car = new Car(600, 500, Color.GREEN);
+            scene.addObject(car);
             scene.invalidate();
         });
 //        game = new Game(new Player("Player", Color.RED), scene, Color.RED);
-//        car = new Car();
 //
 //        game.initializeHud();//
 //        game.start();
