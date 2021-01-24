@@ -7,19 +7,35 @@ import java.util.UUID;
 
 public class BaseObject {
     private final String id;
-    private final int x;
-    private final int y;
+    private double x;
+    private double y;
     private final int width;
     private final int height;
-    private final int color;
-    private final double rotation;
+    private int color;
+    private double rotation;
 
-    public int getX() {
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public double getY() {
         return y;
+    }
+
+    public double getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(double rotation) {
+        this.rotation = rotation;
     }
 
     public int getWidth() {
@@ -34,6 +50,10 @@ public class BaseObject {
         return color;
     }
 
+    public void setColor(int color) {
+        this.color = color;
+    }
+
     public BaseObject(int x, int y, int width, int height, int color, double rotation) {
         this.id = UUID.randomUUID().toString();
         this.x = x;
@@ -45,7 +65,7 @@ public class BaseObject {
     }
 
     public void update(Canvas canvas) {
-        this.draw(this.x, this.y, canvas);
+        this.draw((int) this.x, (int) this.y, canvas);
     }
 
     private void draw(int x, int y, Canvas canvas) {

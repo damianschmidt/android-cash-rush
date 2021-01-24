@@ -8,10 +8,11 @@ public class Game {
     private Player player;
     private Scene scene;
     private Hud hud;
-    Handler timerHandler;
-    Runnable timerRunnable;
+    private Handler timerHandler;
+    private Runnable timerRunnable;
     private int countdown;
     private int counter = 3;
+    private int tick = 0;
 
 
     public Game(Player player, Scene scene, int countdown, TextView gameLabel) {
@@ -31,20 +32,22 @@ public class Game {
         timerRunnable = new Runnable() {
             @Override
             public void run() {
-                timerHandler.postDelayed(this, 1000);
-                if (counter >  0) {
+                timerHandler.postDelayed(this, 1000 / 60);
+                tick += 1;
+                if (counter > 0) {
                     gameLabel.setText(String.valueOf(counter));
-                    counter -= 1;
-
-                    if (counter == 1) {
-                        scene.start();
+                    if (tick % 60 == 0) {
+                        counter -= 1;
+                        tick = 0;
                     }
                 } else {
+                    scene.invalidate();
                     gameLabel.setText(R.string.collect_coins);
-                    countdown -= 1;
-
-                    if (countdown < 1) {
-                        end();
+                    if (tick % 60 == 0) {
+                        countdown -= 1;
+                        if (countdown < 1) {
+                            end();
+                        }
                     }
                 }
             }

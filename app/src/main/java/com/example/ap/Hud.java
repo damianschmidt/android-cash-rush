@@ -15,7 +15,7 @@ public class Hud extends BaseObject {
     }
 
     public void update(Canvas canvas) {
-        draw(this.getX(), this.getY(), canvas);
+        draw((int)this.getX(), (int)this.getY(), canvas);
     }
 
     private void draw(int x, int y, Canvas canvas) {

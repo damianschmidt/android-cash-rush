@@ -15,6 +15,9 @@ public class Scene extends View {
     private List<BaseObject> objects;
     private int baseBlockSize = 20;
 
+    public List<BaseObject> getObjects() {
+        return objects;
+    }
 
     public int getBaseBlockSize() {
         return baseBlockSize;
@@ -50,9 +53,5 @@ public class Scene extends View {
 
     public void addObject(BaseObject item) {
         objects.add(item);
-    }
-
-    public void start() {
-
     }
 }
