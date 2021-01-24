@@ -4,4 +4,6 @@
     <string name="ranking_btn_label">Ranking</string>
     <string name="settings_btn_label">Settings</string>
     <string name="exit_btn_label">Exit</string>
+    <string name="collect_coins">Collect Coins</string>
+    <string name="time_up">Time\'s Up</string>
 </resources>

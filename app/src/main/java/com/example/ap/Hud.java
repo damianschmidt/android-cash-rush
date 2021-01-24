@@ -6,10 +6,12 @@ import android.graphics.Paint;
 
 public class Hud extends BaseObject {
     private Game game;
+    private Scene scene;
 
-    public Hud(Game game) {
-        super(0, 0, 0, 0, Color.BLACK, 0.0);
+    public Hud(Game game, Scene scene) {
+        super(0, 0, scene.getWidth(), scene.getHeight(), Color.BLACK, 0.0);
         this.game = game;
+        this.scene = scene;
     }
 
     public void update(Canvas canvas) {
@@ -17,7 +19,7 @@ public class Hud extends BaseObject {
     }
 
     private void draw(int x, int y, Canvas canvas) {
-        drawTimer(x, y, canvas);
+        drawTimer(canvas);
         drawPlayerScore(x, y, canvas);
     }
 
@@ -25,14 +27,18 @@ public class Hud extends BaseObject {
         Paint paint = new Paint();
         Player player = this.game.getPlayer();
         paint.setColor(player.getColor());
-        paint.setTextSize(40);
-        canvas.drawText("Player " + player.getName() + ": " + player.getScore(), x + 40, y + 715, paint);
+        paint.setTextSize(this.scene.getBaseBlockSize() * 2);
+        canvas.drawText(player.getName() + ": " + player.getScore(), x + (scene.getBaseBlockSize() * 2), y + this.getHeight() - (scene.getBaseBlockSize() * 2), paint);
     }
 
-    private void drawTimer(int x, int y, Canvas canvas) {
+    private void drawTimer(Canvas canvas) {
         Paint paint = new Paint();
+        paint.setTextAlign(Paint.Align.CENTER);
         paint.setColor(Color.rgb(204, 204, 204));
-        paint.setTextSize(430);
-        canvas.drawText(String.valueOf(this.game.getCountdown()), x + 150, y + 460, paint);
+        paint.setTextSize(20 * this.scene.getBaseBlockSize());
+
+        int x = (this.getWidth() / 2);
+        int y = (int) ((this.getHeight() / 2) - ((paint.descent() + paint.ascent()) / 2)) ;
+        canvas.drawText(String.valueOf(this.game.getCountdown()), x, y, paint);
     }
 }

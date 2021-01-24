@@ -13,8 +13,8 @@ public class Coins {
     }
 
     private Coin generateCoin() {
-        int randomNum1 = ThreadLocalRandom.current().nextInt(20, this.scene.getWidth() - 20);
-        int randomNum2 = ThreadLocalRandom.current().nextInt(20, this.scene.getHeight() - 20);
-        return new Coin(randomNum1, randomNum2);
+        int randomNum1 = ThreadLocalRandom.current().nextInt(scene.getBaseBlockSize(), this.scene.getWidth() - scene.getBaseBlockSize());
+        int randomNum2 = ThreadLocalRandom.current().nextInt(scene.getBaseBlockSize(), this.scene.getHeight() - scene.getBaseBlockSize());
+        return new Coin(randomNum1, randomNum2, scene.getBaseBlockSize());
     }
 }

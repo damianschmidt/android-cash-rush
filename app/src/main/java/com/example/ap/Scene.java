@@ -3,10 +3,8 @@ package com.example.ap;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +13,12 @@ public class Scene extends View {
     private Walls walls;
     private Coins coins;
     private List<BaseObject> objects;
+    private int baseBlockSize = 20;
+
+
+    public int getBaseBlockSize() {
+        return baseBlockSize;
+    }
 
     public Scene(Context context) {
         super(context);
@@ -46,5 +50,9 @@ public class Scene extends View {
 
     public void addObject(BaseObject item) {
         objects.add(item);
+    }
+
+    public void start() {
+
     }
 }
