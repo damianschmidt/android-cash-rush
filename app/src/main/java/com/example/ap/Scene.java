@@ -19,6 +19,10 @@ public class Scene extends View {
         return objects;
     }
 
+    public void setObjects(List<BaseObject> objects) {
+        this.objects = objects;
+    }
+
     public int getBaseBlockSize() {
         return baseBlockSize;
     }

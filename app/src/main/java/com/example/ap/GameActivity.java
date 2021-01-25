@@ -48,10 +48,10 @@ public class GameActivity extends AppCompatActivity {
 
         scene = findViewById(R.id.scene);
         scene.post(() -> {
-            game = new Game(new Player("Damian", Color.BLUE), scene, 30, gameLabel);
+            game = new Game(new Player("Damian", Color.BLUE), scene, 15, gameLabel);
             game.initializeHud();
             scene.initializeMap();
-            car = new Car(scene.getWidth() - (scene.getBaseBlockSize() * 8), scene.getHeight() - (scene.getBaseBlockSize() * 10), game.getPlayer().getColor(), scene);
+            car = new Car(scene.getWidth() - (scene.getBaseBlockSize() * 8), scene.getHeight() - (scene.getBaseBlockSize() * 10), game.getPlayer(), scene);
             scene.addObject(car);
             scene.invalidate();
         });

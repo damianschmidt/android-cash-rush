@@ -1,6 +1,7 @@
 package com.example.ap;
 
 import android.os.Handler;
+import android.util.Log;
 import android.widget.TextView;
 
 public class Game {
@@ -24,7 +25,7 @@ public class Game {
 
     public void initializeHud() {
         hud = new Hud(this, scene);
-        this.scene.addObject(hud);
+        scene.addObject(hud);
     }
 
     public void start() {
@@ -45,6 +46,8 @@ public class Game {
                     gameLabel.setText(R.string.collect_coins);
                     if (tick % 60 == 0) {
                         countdown -= 1;
+                        Coin newCoin = new Coin(0, 0, scene.getBaseBlockSize());
+                        scene.addObject(newCoin.generateCoin(scene.getWidth(), scene.getHeight()));
                         if (countdown < 1) {
                             end();
                         }

@@ -3,17 +3,22 @@ package com.example.ap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Car extends CollideObject {
     private Scene scene;
+    private Player player;
     private double speed = 0;
     private double acceleration = 1.08;
     private double initialSpeed = 0.5;
     private double speedDecay = 0.96;
-    private double maxSpeed = 12;
+    private double maxSpeed = 10;
     private double maxBackSpeed = 4;
     private double breakPower = 0.05;
-    private double rotationStep = 2;
+    private double rotationStep = 4;
 
     private double controlX = 0;
     private double controlY = 0;
@@ -34,16 +39,24 @@ public class Car extends CollideObject {
         return !(speed > -initialSpeed);
     }
 
-    public Car(int x, int y, int color, Scene scene) {
-        super(x, y, 3 * scene.getBaseBlockSize(), 5 * scene.getBaseBlockSize(), color);
+    public Car(int x, int y, Player player, Scene scene) {
+        super(x, y, 3 * scene.getBaseBlockSize(), 5 * scene.getBaseBlockSize(), player.getColor());
+        this.player = player;
         this.scene = scene;
     }
 
     public void update(Canvas canvas) {
-        for (BaseObject object : scene.getObjects()) {
+        for (BaseObject object : new ArrayList<>(scene.getObjects())) {
             if ((object instanceof CollideObject) && !(object instanceof Car)) {
-                if (isCollide(object)) {
-                    speed = -speed;
+                if (isCollideSAT(object)) {
+                    if (object instanceof Coin) {
+                        player.incrementScore();
+                        List<BaseObject> newObjects = scene.getObjects();
+                        newObjects.remove(object);
+                        scene.setObjects(newObjects);
+                    } else {
+                        speed = -speed;
+                    }
                 }
             }
         }
@@ -54,10 +67,10 @@ public class Car extends CollideObject {
             speed *= speedDecay;
         }
 
-        control();
         setX(getX() + getAxisX());
         setY(getY() + getAxisY());
         draw((int) getX(), (int) getY(), canvas);
+        control();
     }
 
     private double getAxisX() {
@@ -98,28 +111,28 @@ public class Car extends CollideObject {
 
     private void turnLeft() {
         if (isMoving()) {
-            setRotation(getRotation() - rotationStep * (speed / maxSpeed));
+            setRotation((getRotation() - Math.abs(controlX * 2) * (speed / maxSpeed)) % 360);
         }
     }
 
     private void turnRight() {
         if (isMoving()) {
-            setRotation(getRotation() + rotationStep * (speed / maxSpeed));
+            setRotation((getRotation() + Math.abs(controlX * 2) * (speed / maxSpeed)) % 360);
         }
     }
 
     private void control() {
-        if (controlY < -0.5) {
+        if (controlY < -0.3) {
             accelerate();
-        } else if (controlY > 1) {
+        } else if (controlY > -0.3) {
             decelerate();
         } else {
             momentum();
         }
 
-        if (controlX > 0.5) {
+        if (controlX > 0.3) {
             turnLeft();
-        } else if (controlY < -1) {
+        } else if (controlX < -0.3) {
             turnRight();
         }
     }

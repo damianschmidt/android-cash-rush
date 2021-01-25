@@ -13,7 +13,7 @@ public class Player {
         this.score = 0;
     }
 
-    private void incrementScore() {
+    public void incrementScore() {
         score += 1;
     }
 
