@@ -51,9 +51,7 @@ public class Car extends CollideObject {
                 if (isCollideSAT(object)) {
                     if (object instanceof Coin) {
                         player.incrementScore();
-                        List<BaseObject> newObjects = scene.getObjects();
-                        newObjects.remove(object);
-                        scene.setObjects(newObjects);
+                        ((Coin) object).generateCoin(scene.getWidth(), scene.getHeight());
                     } else {
                         speed = -speed;
                     }
@@ -67,10 +65,10 @@ public class Car extends CollideObject {
             speed *= speedDecay;
         }
 
+        control();
         setX(getX() + getAxisX());
         setY(getY() + getAxisY());
         draw((int) getX(), (int) getY(), canvas);
-        control();
     }
 
     private double getAxisX() {
@@ -122,17 +120,17 @@ public class Car extends CollideObject {
     }
 
     private void control() {
-        if (controlY < -0.3) {
+        if (controlY < -0.5) {
             accelerate();
-        } else if (controlY > -0.3) {
+        } else if (controlY > -0.5) {
             decelerate();
         } else {
             momentum();
         }
 
-        if (controlX > 0.3) {
+        if (controlX > 0.5) {
             turnLeft();
-        } else if (controlX < -0.3) {
+        } else if (controlX < -0.5) {
             turnRight();
         }
     }

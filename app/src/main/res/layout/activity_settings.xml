@@ -6,15 +6,123 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
+    <ImageView
+        android:id="@+id/imageViewMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"/>
+
     <TextView
         android:id="@+id/settings_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SETTINGS"
+        android:layout_marginTop="10dp"
+        android:text="Settings"
         android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/settings_inputs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/settings_inputs"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_label"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/playerNameLabel"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:text="Player name"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:hint="Enter player name..."
+            />
+
+        <TextView
+            android:id="@+id/colorPicker"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:text="Choose color"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            />
+
+        <RadioGroup
+            android:id="@+id/colorPickerGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:checkedButton="@id/radioGreenColor"
+            android:background="@color/whiteOpacity"
+            app:layout_constraintBottom_toTopOf="@+id/titleBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleSelect">
+
+            <RadioButton
+                android:id="@+id/radioGreenColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:buttonTint="@color/green"
+                android:text="Green" />
+
+            <RadioButton
+                android:id="@+id/radioRedColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:buttonTint="@color/red"
+                android:text="Red" />
+
+            <RadioButton
+                android:id="@+id/radioBlueColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:buttonTint="@color/blue"
+                android:text="Blue" />
+
+            <RadioButton
+                android:id="@+id/radioMagentaColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:buttonTint="@color/magenta"
+                android:text="Magenta" />
+
+            <RadioButton
+                android:id="@+id/radioAquaColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:buttonTint="@color/aqua"
+                android:text="Aqua" />
+
+        </RadioGroup>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

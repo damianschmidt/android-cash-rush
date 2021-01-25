@@ -10,6 +10,9 @@ public class Coins {
         scene.addObject(generateCoin());
         scene.addObject(generateCoin());
         scene.addObject(generateCoin());
+        scene.addObject(generateCoin());
+        scene.addObject(generateCoin());
+        scene.addObject(generateCoin());
     }
 
     private Coin generateCoin() {

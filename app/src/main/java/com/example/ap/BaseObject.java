@@ -65,7 +65,7 @@ public class BaseObject {
     }
 
     public void update(Canvas canvas) {
-        this.draw((int) this.x, (int) this.y, canvas);
+        draw((int) this.x, (int) this.y, canvas);
     }
 
     private void draw(int x, int y, Canvas canvas) {
