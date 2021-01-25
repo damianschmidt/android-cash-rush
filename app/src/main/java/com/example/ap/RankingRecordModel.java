@@ -15,7 +15,7 @@ public class RankingRecordModel {
 
     @Override
     public String toString() {
-        return "Player: " + name + "          " + "Score: " + points;
+        return name + " " + points;
     }
 
     public int getId() {
@@ -42,3 +42,4 @@ public class RankingRecordModel {
         this.points = points;
     }
 }
+

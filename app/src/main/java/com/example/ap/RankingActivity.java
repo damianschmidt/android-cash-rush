@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 public class RankingActivity extends AppCompatActivity {
     private ListView rankingList;
     DatabaseHelper databaseHelper;
@@ -21,13 +25,14 @@ public class RankingActivity extends AppCompatActivity {
 
         rankingList = findViewById(R.id.database_value);
         databaseHelper = new DatabaseHelper(RankingActivity.this);
-        RankingRecordModel rankingModel = new RankingRecordModel(-1, "Player", 0);
-        databaseHelper.addOne(rankingModel);
         ShowPlayersOnListView();
     }
 
     private void ShowPlayersOnListView() {
-        ArrayAdapter playerArrayAdapter = new ArrayAdapter(RankingActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getAll()) {
+        List<RankingRecordModel> records = databaseHelper.getAll();
+        records.sort((object1, object2) -> object2.getPoints() - object1.getPoints());
+
+        ArrayAdapter playerArrayAdapter = new ArrayAdapter(RankingActivity.this, android.R.layout.simple_list_item_1, records) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);

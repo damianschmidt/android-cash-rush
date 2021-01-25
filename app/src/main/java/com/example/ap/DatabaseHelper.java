@@ -9,13 +9,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String RANKING_TABLE = "RANKING_TABLE";
     public static final String COLUMN_RANKING_NAME = "RANKING_NAME";
     public static final String COLUMN_RANKING_POINTS = "RANKING_POINTS";
-    public static final String COLUMN_ID = "ID";
+    public static final String COLUMN_RANKING_ID = "ID";
+
+    public static final String PLAYER_TABLE = "PLAYER_TABLE";
+    public static final String COLUMN_PLAYER_NAME = "PLAYER_NAME";
+    public static final String COLUMN_PLAYER_COLOR = "PLAYER_COLOR";
+    public static final String COLUMN_PLAYER_ID = "ID";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, "ranking.db", null, 1);
@@ -23,14 +30,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + RANKING_TABLE + " (" + COLUMN_ID +
+        String createRankingTableStatement = "CREATE TABLE " + RANKING_TABLE + " (" + COLUMN_RANKING_ID +
                 " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_RANKING_NAME + " TEXT, " +
                 COLUMN_RANKING_POINTS + " INT)";
-        db.execSQL(createTableStatement);
+        db.execSQL(createRankingTableStatement);
+
+        String createPlayerTableStatement = "CREATE TABLE " + PLAYER_TABLE + " (" + COLUMN_PLAYER_ID +
+                " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_PLAYER_NAME + " TEXT, " +
+                COLUMN_PLAYER_COLOR + " INT)";
+        db.execSQL(createPlayerTableStatement);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+
+    public boolean updatePlayerName() {
+        return false;
+    }
+
+    public String getPlayerName() {
+        return "";
+    }
+
+    public void setPlayerName() {
+    }
+
+    public boolean updatePlayerColor() {
+        return false;
+    }
+
+    public int getPlayerColor() {
+        return 0;
+    }
+
+    public void setPlayerColor() {
 
     }
 
@@ -47,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean deleteOne(RankingRecordModel rankingRecordModel) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = "DELETE FROM " + RANKING_TABLE + " WHERE " + COLUMN_ID + " = " + rankingRecordModel.getId();
+        String queryString = "DELETE FROM " + RANKING_TABLE + " WHERE " + COLUMN_RANKING_ID + " = " + rankingRecordModel.getId();
 
         Cursor cursor = db.rawQuery(queryString, null);
         return cursor.moveToFirst();

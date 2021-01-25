@@ -11,16 +11,18 @@ public class Game {
     private Hud hud;
     private Handler timerHandler;
     private Runnable timerRunnable;
+    private DatabaseHelper databaseHelper;
     private int countdown;
     private int counter = 3;
     private int tick = 0;
 
 
-    public Game(Player player, Scene scene, int countdown, TextView gameLabel) {
+    public Game(Player player, Scene scene, int countdown, TextView gameLabel, DatabaseHelper databaseHelper) {
         this.gameLabel = gameLabel;
         this.player = player;
         this.scene = scene;
         this.countdown = countdown;
+        this.databaseHelper = databaseHelper;
     }
 
     public void initializeHud() {
@@ -48,6 +50,7 @@ public class Game {
                         countdown -= 1;
                         if (countdown < 1) {
                             end();
+                            databaseHelper.addOne(new RankingRecordModel(-1, getPlayer().getName(), getPlayer().getScore()));
                         }
                     }
                 }

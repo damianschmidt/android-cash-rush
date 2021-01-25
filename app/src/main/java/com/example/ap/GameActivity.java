@@ -21,6 +21,7 @@ public class GameActivity extends AppCompatActivity {
     private Car car;
     private TextView gameLabel;
     private Button gameStartBtn;
+    DatabaseHelper databaseHelper;
 
     private final SensorEventListener accelerometerSensorListener = new SensorEventListener() {
         @Override
@@ -46,9 +47,11 @@ public class GameActivity extends AppCompatActivity {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+        databaseHelper = new DatabaseHelper(GameActivity.this);
+
         scene = findViewById(R.id.scene);
         scene.post(() -> {
-            game = new Game(new Player("Damian", Color.BLUE), scene, 15, gameLabel);
+            game = new Game(new Player("Damian", Color.BLUE), scene, 15, gameLabel, databaseHelper);
             game.initializeHud();
             scene.initializeMap();
             car = new Car(scene.getWidth() - (scene.getBaseBlockSize() * 8), scene.getHeight() - (scene.getBaseBlockSize() * 10), game.getPlayer(), scene);
