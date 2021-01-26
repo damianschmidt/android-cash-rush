@@ -1,5 +1,6 @@
 package com.example.ap;
 
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
@@ -30,7 +31,8 @@ public class Game {
         scene.addObject(hud);
     }
 
-    public void start() {
+    public void start(MediaPlayer music) {
+        music.start();
         timerHandler = new Handler();
         timerRunnable = new Runnable() {
             @Override
@@ -50,6 +52,7 @@ public class Game {
                         countdown -= 1;
                         if (countdown < 1) {
                             end();
+                            music.stop();
                             databaseHelper.addOne(new RankingRecordModel(-1, getPlayer().getName(), getPlayer().getScore()));
                         }
                     }
@@ -62,8 +65,6 @@ public class Game {
     private void end() {
         timerHandler.removeCallbacks(timerRunnable);
         gameLabel.setText(R.string.time_up);
-
-        // save score to database if is in top 10
     }
 
     public int getCountdown() {

@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,8 @@ public class GameActivity extends AppCompatActivity {
     private Car car;
     private TextView gameLabel;
     private Button gameStartBtn;
-    DatabaseHelper databaseHelper;
+    private MediaPlayer music;
+    private DatabaseHelper databaseHelper;
 
     private final SensorEventListener accelerometerSensorListener = new SensorEventListener() {
         @Override
@@ -40,6 +42,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_game);
         gameLabel = findViewById(R.id.game_label);
         gameStartBtn = findViewById(R.id.game_start_btn);
@@ -54,7 +57,6 @@ public class GameActivity extends AppCompatActivity {
         scene = findViewById(R.id.scene);
         scene.post(() -> {
             game = new Game(new Player(playerName, playerColor), scene, 15, gameLabel, databaseHelper);
-//            game = new Game(new Player("test", 123), scene, 15, gameLabel, databaseHelper);
             game.initializeHud();
             scene.initializeMap();
             car = new Car(scene.getWidth() - (scene.getBaseBlockSize() * 8), scene.getHeight() - (scene.getBaseBlockSize() * 10), game.getPlayer(), scene);
@@ -63,7 +65,8 @@ public class GameActivity extends AppCompatActivity {
         });
 
         gameStartBtn.setOnClickListener(v -> {
-            game.start();
+            music = MediaPlayer.create(GameActivity.this, R.raw.game);
+            game.start(music);
             gameLabel.setVisibility(View.VISIBLE);
             gameStartBtn.setVisibility(View.GONE);
         });
@@ -75,6 +78,9 @@ public class GameActivity extends AppCompatActivity {
         if (sensorAccelerometer != null) {
             sensorManager.registerListener(accelerometerSensorListener, sensorAccelerometer, SensorManager.SENSOR_DELAY_GAME);
         }
+        if (music != null) {
+            music.start();
+        }
     }
 
     @Override
@@ -83,5 +89,6 @@ public class GameActivity extends AppCompatActivity {
         if (sensorAccelerometer != null) {
             sensorManager.unregisterListener(accelerometerSensorListener);
         }
+        music.pause();
     }
 }
