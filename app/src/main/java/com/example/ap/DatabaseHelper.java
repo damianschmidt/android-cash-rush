@@ -5,12 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
 
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -25,46 +24,123 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PLAYER_ID = "ID";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "ranking.db", null, 1);
+        super(context, "game.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createRankingTableStatement = "CREATE TABLE " + RANKING_TABLE + " (" + COLUMN_RANKING_ID +
-                " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_RANKING_NAME + " TEXT, " +
-                COLUMN_RANKING_POINTS + " INT)";
-        db.execSQL(createRankingTableStatement);
+        String createPlayerTableStatement = "CREATE TABLE IF NOT EXISTS " + PLAYER_TABLE +
+                " (" + COLUMN_PLAYER_ID + " INTEGER PRIMARY KEY, " +
+                COLUMN_PLAYER_NAME + " TEXT, " +
+                COLUMN_PLAYER_COLOR + " INTEGER)";
 
-        String createPlayerTableStatement = "CREATE TABLE " + PLAYER_TABLE + " (" + COLUMN_PLAYER_ID +
-                " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_PLAYER_NAME + " TEXT, " +
-                COLUMN_PLAYER_COLOR + " INT)";
+        String createRankingTableStatement = "CREATE TABLE IF NOT EXISTS " + RANKING_TABLE +
+                " (" + COLUMN_RANKING_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_RANKING_NAME + " TEXT, " +
+                COLUMN_RANKING_POINTS + " INTEGER)";
+
         db.execSQL(createPlayerTableStatement);
+        db.execSQL(createRankingTableStatement);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + RANKING_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + PLAYER_TABLE);
+        onCreate(db);
+    }
 
-    public boolean updatePlayerName() {
-        return false;
+    public void dropTables() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + RANKING_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + PLAYER_TABLE);
+    }
+
+    public void updatePlayerName(String name) {
+        String queryString = "SELECT * FROM " + PLAYER_TABLE;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_PLAYER_NAME, name);
+            db.update(PLAYER_TABLE, cv, COLUMN_PLAYER_ID + " = ? ",
+                    new String[]{String.valueOf(1)});
+        } else {
+            addOnePlayerSettings("Player", Color.GREEN);
+        }
+
+        cursor.close();
+        db.close();
+    }
+
+    public boolean addOnePlayerSettings(String name, int color) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_PLAYER_ID, 1);
+        cv.put(COLUMN_PLAYER_NAME, name);
+        cv.put(COLUMN_PLAYER_COLOR, color);
+
+        long insert = db.insert(PLAYER_TABLE, null, cv);
+        return insert != -1;
     }
 
     public String getPlayerName() {
-        return "";
+        String playerName = "Player";
+
+        try {
+            String queryString = "SELECT * FROM " + PLAYER_TABLE;
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(queryString, null);
+
+            if (cursor.moveToFirst()) {
+                playerName = cursor.getString(1);
+            }
+
+            cursor.close();
+            db.close();
+            return playerName;
+        } catch (Exception error) {
+            return playerName;
+        }
     }
 
-    public void setPlayerName() {
-    }
+    public void updatePlayerColor(int color) {
+        String queryString = "SELECT * FROM " + PLAYER_TABLE;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
 
-    public boolean updatePlayerColor() {
-        return false;
+        if (cursor.moveToFirst()) {
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_PLAYER_COLOR, color);
+            db.update(PLAYER_TABLE, cv, COLUMN_PLAYER_ID + " = ? ",
+                    new String[]{String.valueOf(1)});
+        } else {
+            addOnePlayerSettings("Player", color);
+        }
+
+        cursor.close();
+        db.close();
     }
 
     public int getPlayerColor() {
-        return 0;
-    }
+        int playerColor = Color.GREEN;
+        try {
+            String queryString = "SELECT * FROM " + PLAYER_TABLE;
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(queryString, null);
 
-    public void setPlayerColor() {
+            if (cursor.moveToFirst()) {
+                playerColor = cursor.getInt(2);
+            }
 
+            cursor.close();
+            db.close();
+            return playerColor;
+        } catch (Exception error) {
+            return playerColor;
+        }
     }
 
     public boolean addOne(RankingRecordModel rankingRecordModel) {
@@ -84,6 +160,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(queryString, null);
         return cursor.moveToFirst();
+    }
+
+    public boolean deleteAll() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + RANKING_TABLE;
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        return cursor.moveToFirst();
+    }
+
+    public boolean deleteAllPlayers() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + PLAYER_TABLE;
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        return cursor.moveToFirst();
+    }
+
+    public List<PlayerModel> getAllPlayers() {
+        List<PlayerModel> returnList = new ArrayList<>();
+        String queryString = "SELECT * FROM " + PLAYER_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int playerID = cursor.getInt(0);
+                String playerName = cursor.getString(1);
+                int playerColor = cursor.getInt(2);
+
+                PlayerModel newPlayer = new PlayerModel(playerID, playerName, playerColor);
+                returnList.add(newPlayer);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
     }
 
     public List<RankingRecordModel> getAll() {

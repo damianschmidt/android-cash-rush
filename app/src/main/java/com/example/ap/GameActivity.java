@@ -48,10 +48,13 @@ public class GameActivity extends AppCompatActivity {
         sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         databaseHelper = new DatabaseHelper(GameActivity.this);
+        String playerName = databaseHelper.getPlayerName();
+        int playerColor = databaseHelper.getPlayerColor();
 
         scene = findViewById(R.id.scene);
         scene.post(() -> {
-            game = new Game(new Player("Damian", Color.BLUE), scene, 15, gameLabel, databaseHelper);
+            game = new Game(new Player(playerName, playerColor), scene, 15, gameLabel, databaseHelper);
+//            game = new Game(new Player("test", 123), scene, 15, gameLabel, databaseHelper);
             game.initializeHud();
             scene.initializeMap();
             car = new Car(scene.getWidth() - (scene.getBaseBlockSize() * 8), scene.getHeight() - (scene.getBaseBlockSize() * 10), game.getPlayer(), scene);

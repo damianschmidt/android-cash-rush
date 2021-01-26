@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class RankingActivity extends AppCompatActivity {
@@ -31,7 +29,6 @@ public class RankingActivity extends AppCompatActivity {
     private void ShowPlayersOnListView() {
         List<RankingRecordModel> records = databaseHelper.getAll();
         records.sort((object1, object2) -> object2.getPoints() - object1.getPoints());
-
         ArrayAdapter playerArrayAdapter = new ArrayAdapter(RankingActivity.this, android.R.layout.simple_list_item_1, records) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
