@@ -11,8 +11,6 @@ public class RankingRecordModel {
         this.points = points;
     }
 
-    public RankingRecordModel() {}
-
     @Override
     public String toString() {
         return name + " " + points;

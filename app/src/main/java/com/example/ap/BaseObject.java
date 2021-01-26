@@ -3,10 +3,7 @@ package com.example.ap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import java.util.UUID;
-
 public class BaseObject {
-    private final String id;
     private double x;
     private double y;
     private final int width;
@@ -55,7 +52,6 @@ public class BaseObject {
     }
 
     public BaseObject(int x, int y, int width, int height, int color, double rotation) {
-        this.id = UUID.randomUUID().toString();
         this.x = x;
         this.y = y;
         this.width = width;

@@ -3,10 +3,7 @@ package com.example.ap;
 import android.graphics.Color;
 
 public class Walls {
-    private Scene scene;
-
     public Walls(Scene scene) {
-        this.scene = scene;
         int color = Color.WHITE;
         scene.addObject(new CollideObject(0, 0, scene.getBaseBlockSize(), scene.getHeight(), color));
         scene.addObject(new CollideObject(scene.getBaseBlockSize(), 0, scene.getWidth() - 2 * scene.getBaseBlockSize(), scene.getBaseBlockSize(), color));

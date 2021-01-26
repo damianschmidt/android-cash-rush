@@ -5,8 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 public class Hud extends BaseObject {
-    private Game game;
-    private Scene scene;
+    private final Game game;
+    private final Scene scene;
 
     public Hud(Game game, Scene scene) {
         super(0, 0, scene.getWidth(), scene.getHeight(), Color.BLACK, 0.0);

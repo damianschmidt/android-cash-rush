@@ -10,17 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Scene extends View {
-    private Walls walls;
-    private Coins coins;
-    private List<BaseObject> objects;
+    private final List<BaseObject> objects;
     private int baseBlockSize = 20;
 
     public List<BaseObject> getObjects() {
         return objects;
-    }
-
-    public void setObjects(List<BaseObject> objects) {
-        this.objects = objects;
     }
 
     public int getBaseBlockSize() {
@@ -55,8 +49,8 @@ public class Scene extends View {
     }
 
     public void initializeMap() {
-        walls = new Walls(this);
-        coins = new Coins(this);
+        new Walls(this);
+        new Coins(this);
     }
 
     public void addObject(BaseObject item) {

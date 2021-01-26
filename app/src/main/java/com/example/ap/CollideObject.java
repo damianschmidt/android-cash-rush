@@ -5,17 +5,6 @@ public class CollideObject extends BaseObject {
         super(x, y, width, height, color, 0.0);
     }
 
-    private BaseObject collide(BaseObject object) {
-        if (getX() < object.getX() + object.getWidth() &&
-            getX() + getWidth() > object.getX() &&
-            getY() < object.getY() + object.getHeight() &&
-            getHeight() + getY() > object.getY()) {
-            return object;
-        } else {
-            return null;
-        }
-    }
-
     public boolean isCollideSAT(BaseObject object) {
         Point p1 = new Point(getX(), getY());
         Point p2 = new Point(getX() + getWidth(), getY());
@@ -43,9 +32,5 @@ public class CollideObject extends BaseObject {
         isOverlapOnY = !(yMyObjectMax < yOtherObjectMin) && !(yOtherObjectMax < yMyObjectMin);
 
         return (isOverlapOnX && isOverlapOnY);
-    }
-
-    public boolean isCollide(BaseObject object) {
-        return collide(object) != null;
     }
 }

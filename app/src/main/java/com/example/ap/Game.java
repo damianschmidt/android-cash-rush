@@ -2,17 +2,15 @@ package com.example.ap;
 
 import android.media.MediaPlayer;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.TextView;
 
 public class Game {
-    private TextView gameLabel;
-    private Player player;
-    private Scene scene;
-    private Hud hud;
+    private final TextView gameLabel;
+    private final Player player;
+    private final Scene scene;
     private Handler timerHandler;
     private Runnable timerRunnable;
-    private DatabaseHelper databaseHelper;
+    private final DatabaseHelper databaseHelper;
     private int countdown;
     private int counter = 3;
     private int tick = 0;
@@ -27,7 +25,7 @@ public class Game {
     }
 
     public void initializeHud() {
-        hud = new Hud(this, scene);
+        Hud hud = new Hud(this, scene);
         scene.addObject(hud);
     }
 

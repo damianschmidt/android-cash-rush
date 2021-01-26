@@ -3,7 +3,7 @@ package com.example.ap;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Coins {
-    private Scene scene;
+    private final Scene scene;
 
     public Coins(Scene scene) {
         this.scene = scene;

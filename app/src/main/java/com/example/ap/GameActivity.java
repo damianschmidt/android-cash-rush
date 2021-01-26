@@ -2,7 +2,6 @@ package com.example.ap;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;

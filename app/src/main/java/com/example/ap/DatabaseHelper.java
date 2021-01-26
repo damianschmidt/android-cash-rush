@@ -74,7 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public boolean addOnePlayerSettings(String name, int color) {
+    public void addOnePlayerSettings(String name, int color) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -82,8 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_PLAYER_NAME, name);
         cv.put(COLUMN_PLAYER_COLOR, color);
 
-        long insert = db.insert(PLAYER_TABLE, null, cv);
-        return insert != -1;
+        db.insert(PLAYER_TABLE, null, cv);
     }
 
     public String getPlayerName() {
@@ -143,61 +142,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean addOne(RankingRecordModel rankingRecordModel) {
+    public void addOne(RankingRecordModel rankingRecordModel) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_RANKING_NAME, rankingRecordModel.getName());
         cv.put(COLUMN_RANKING_POINTS, rankingRecordModel.getPoints());
 
-        long insert = db.insert(RANKING_TABLE, null, cv);
-        return insert != -1;
-    }
-
-    public boolean deleteOne(RankingRecordModel rankingRecordModel) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = "DELETE FROM " + RANKING_TABLE + " WHERE " + COLUMN_RANKING_ID + " = " + rankingRecordModel.getId();
-
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor.moveToFirst();
-    }
-
-    public boolean deleteAll() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = "DELETE FROM " + RANKING_TABLE;
-
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor.moveToFirst();
-    }
-
-    public boolean deleteAllPlayers() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = "DELETE FROM " + PLAYER_TABLE;
-
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor.moveToFirst();
-    }
-
-    public List<PlayerModel> getAllPlayers() {
-        List<PlayerModel> returnList = new ArrayList<>();
-        String queryString = "SELECT * FROM " + PLAYER_TABLE;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(queryString, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                int playerID = cursor.getInt(0);
-                String playerName = cursor.getString(1);
-                int playerColor = cursor.getInt(2);
-
-                PlayerModel newPlayer = new PlayerModel(playerID, playerName, playerColor);
-                returnList.add(newPlayer);
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-        return returnList;
+        db.insert(RANKING_TABLE, null, cv);
     }
 
     public List<RankingRecordModel> getAll() {
