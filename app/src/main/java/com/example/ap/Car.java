@@ -103,10 +103,6 @@ public class Car extends CollideObject {
         }
     }
 
-    private void momentum() {
-        speed *= speedDecay;
-    }
-
     private void turnLeft() {
         if (isMoving()) {
             setRotation((getRotation() - Math.abs(controlX * 2) * (speed / maxSpeed)) % 360);
@@ -124,8 +120,6 @@ public class Car extends CollideObject {
             accelerate();
         } else if (controlY > -0.5) {
             decelerate();
-        } else {
-            momentum();
         }
 
         if (controlX > 0.5) {

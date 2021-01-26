@@ -6,4 +6,16 @@
     <string name="exit_btn_label">Exit</string>
     <string name="collect_coins">Collect Coins</string>
     <string name="time_up">Time\'s Up</string>
+    <string name="backgroundDescription">Background</string>
+    <string name="gameTitle">Cash Rush</string>
+    <string name="rankingLabel">Ranking</string>
+    <string name="settingsLabel">Settings</string>
+    <string name="playerNameLabel">Player name</string>
+    <string name="playerNameHint">Enter player name...</string>
+    <string name="colorPickerLabel">Choose color</string>
+    <string name="green">Green</string>
+    <string name="red">Red</string>
+    <string name="blue">Blue</string>
+    <string name="magenta">Magenta</string>
+    <string name="cyan">Cyan</string>
 </resources>

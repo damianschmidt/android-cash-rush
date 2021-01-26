@@ -1,6 +1,7 @@
 package com.example.ap;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -55,6 +56,13 @@ public class GameActivity extends AppCompatActivity {
         int playerColor = databaseHelper.getPlayerColor();
 
         scene = findViewById(R.id.scene);
+
+        if ((getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                Configuration.SCREENLAYOUT_SIZE_LARGE) {
+            scene.setBaseBlockSize(60);
+        }
+
         scene.post(() -> {
             game = new Game(new Player(playerName, playerColor), scene, 15, gameLabel, databaseHelper);
             game.initializeHud();

@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/settingsLabel"
-        android:textSize="50sp"
+        android:textSize="150sp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/settings_inputs"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
 
     <LinearLayout
         android:id="@+id/settings_inputs"
-        android:layout_margin="20dp"
+        android:layout_margin="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,44 +38,56 @@
         app:layout_constraintTop_toBottomOf="@id/settings_label"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/playerNameLabel"
-            android:layout_marginBottom="20dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAlignment="center"
-            android:text="@string/playerNameLabel"
-            android:textSize="25sp"
-            android:textColor="@color/white"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/playerNameInput"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="20dp"
-            android:layout_height="match_parent"
-            android:inputType="text"
-            android:background="@color/white"
-            android:padding="10dp"
-            android:hint="@string/playerNameHint"
-            android:importantForAutofill="no" />
+            <TextView
+                android:id="@+id/playerNameLabel"
+                android:layout_marginRight="60dp"
+                android:gravity="center"
+                android:layout_marginBottom="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/playerNameLabel"
+                android:textSize="75sp"
+                android:textColor="@color/white"
+                />
+
+            <EditText
+                android:id="@+id/playerNameInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="60dp"
+                android:inputType="text"
+                android:background="@color/white"
+                android:padding="30dp"
+                android:textSize="50sp"
+                android:hint="@string/playerNameHint"
+                android:importantForAutofill="no" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/colorPicker"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="60dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAlignment="center"
             android:text="@string/colorPickerLabel"
-            android:textSize="25sp"
+            android:textSize="75sp"
             android:textColor="@color/white"
             />
 
         <RadioGroup
             android:id="@+id/colorPickerGroup"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp"
+            android:padding="60dp"
             android:checkedButton="@id/radioGreenColor"
             android:background="@color/whiteOpacity"
             app:layout_constraintBottom_toTopOf="@+id/titleBar"
@@ -85,40 +97,55 @@
 
             <RadioButton
                 android:id="@+id/radioGreenColor"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:paddingLeft="30dp"
+                android:textSize="50sp"
                 android:textColor="@color/white"
                 android:buttonTint="@color/green"
                 android:text="@string/green" />
 
             <RadioButton
                 android:id="@+id/radioRedColor"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:paddingLeft="30dp"
+                android:textSize="50sp"
                 android:textColor="@color/white"
                 android:buttonTint="@color/red"
                 android:text="@string/red" />
 
             <RadioButton
                 android:id="@+id/radioBlueColor"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:paddingLeft="30dp"
+                android:textSize="50sp"
                 android:textColor="@color/white"
                 android:buttonTint="@color/blue"
                 android:text="@string/blue" />
 
             <RadioButton
                 android:id="@+id/radioMagentaColor"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:paddingLeft="30dp"
+                android:textSize="50sp"
                 android:textColor="@color/white"
                 android:buttonTint="@color/magenta"
                 android:text="@string/magenta" />
 
             <RadioButton
                 android:id="@+id/radioAquaColor"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:paddingLeft="30dp"
+                android:textSize="50sp"
                 android:textColor="@color/white"
                 android:buttonTint="@color/aqua"
                 android:text="@string/cyan" />

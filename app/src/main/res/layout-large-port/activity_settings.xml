@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/settingsLabel"
-        android:textSize="50sp"
+        android:textSize="150sp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/settings_inputs"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
 
     <LinearLayout
         android:id="@+id/settings_inputs"
-        android:layout_margin="20dp"
+        android:layout_margin="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,34 +40,35 @@
 
         <TextView
             android:id="@+id/playerNameLabel"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="60dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAlignment="center"
             android:text="@string/playerNameLabel"
-            android:textSize="25sp"
+            android:textSize="75sp"
             android:textColor="@color/white"
             />
 
         <EditText
             android:id="@+id/playerNameInput"
             android:layout_width="match_parent"
-            android:layout_marginBottom="20dp"
             android:layout_height="match_parent"
+            android:layout_marginBottom="60dp"
             android:inputType="text"
             android:background="@color/white"
-            android:padding="10dp"
+            android:padding="30dp"
+            android:textSize="50sp"
             android:hint="@string/playerNameHint"
             android:importantForAutofill="no" />
 
         <TextView
             android:id="@+id/colorPicker"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="60dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAlignment="center"
             android:text="@string/colorPickerLabel"
-            android:textSize="25sp"
+            android:textSize="75sp"
             android:textColor="@color/white"
             />
 
@@ -75,7 +76,7 @@
             android:id="@+id/colorPickerGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp"
+            android:padding="60dp"
             android:checkedButton="@id/radioGreenColor"
             android:background="@color/whiteOpacity"
             app:layout_constraintBottom_toTopOf="@+id/titleBar"
@@ -87,7 +88,10 @@
                 android:id="@+id/radioGreenColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="20dp"
                 android:textColor="@color/white"
+                android:textSize="50sp"
                 android:buttonTint="@color/green"
                 android:text="@string/green" />
 
@@ -95,7 +99,10 @@
                 android:id="@+id/radioRedColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="20dp"
                 android:textColor="@color/white"
+                android:textSize="50sp"
                 android:buttonTint="@color/red"
                 android:text="@string/red" />
 
@@ -103,7 +110,10 @@
                 android:id="@+id/radioBlueColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="20dp"
                 android:textColor="@color/white"
+                android:textSize="50sp"
                 android:buttonTint="@color/blue"
                 android:text="@string/blue" />
 
@@ -111,7 +121,10 @@
                 android:id="@+id/radioMagentaColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="20dp"
                 android:textColor="@color/white"
+                android:textSize="50sp"
                 android:buttonTint="@color/magenta"
                 android:text="@string/magenta" />
 
@@ -119,7 +132,10 @@
                 android:id="@+id/radioAquaColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="20dp"
                 android:textColor="@color/white"
+                android:textSize="50sp"
                 android:buttonTint="@color/aqua"
                 android:text="@string/cyan" />
 

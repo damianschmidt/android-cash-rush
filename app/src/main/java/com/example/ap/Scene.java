@@ -27,6 +27,10 @@ public class Scene extends View {
         return baseBlockSize;
     }
 
+    public void setBaseBlockSize(int baseBlockSize) {
+        this.baseBlockSize = baseBlockSize;
+    }
+
     public Scene(Context context) {
         super(context);
         objects = new ArrayList<BaseObject>();
